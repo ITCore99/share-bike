@@ -6,7 +6,7 @@ export default class Fooster extends  React.Component
     {
         return(
             <div className="fooster">
-               推荐使用谷歌浏览进行访问，可以获得极致的体验--技术支持:未知的程序员.
+               推荐使用谷歌浏览进行访问，可以获得极致的体验   技术支持----未名的程序员.
             </div>
         );
     }

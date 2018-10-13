@@ -4,7 +4,8 @@ import {Link} from "react-router-dom"
 import "../../style/common.less"
 import {formatDate} from "../../utils/index"
 import axios from "axios"
-export default class Header extends  React.Component
+import {connect} from "react-redux" //取出
+class Header extends  React.Component
 {
     time:"";
     constructor(props)
@@ -26,14 +27,13 @@ export default class Header extends  React.Component
         },1000);
         this.getWeather();
     }
-    componentWillUnMout()
+    componentWillUnmount()
     {
         clearInterval(this.time)
     }
     getWeather()
     {
         axios.get(`http://t.weather.sojson.com/api/weather/city/101010100`).then(res=>{
-            console.log(res.data.data.forecast[0]);
             let weather=res.data.data.forecast[0];
             let weatherStr=`${weather.low}~${weather.high} ${weather.fx} ${weather.fl}`
             this.setState({
@@ -54,7 +54,7 @@ export default class Header extends  React.Component
                     </div>
                 </div>
                 <div className="weather-wrap clearFix">
-                    <div className="breadCrumb fll ">首页</div>
+                    <div className="breadCrumb fll ">{this.props.menuTitle.menuItemTitle}</div>
                     <div className="weather flr">
                         {this.state.weather}
                     </div>
@@ -67,3 +67,10 @@ export default class Header extends  React.Component
     }
 
 }
+function mapSateToProps(state) /**将state映射到组件的props中*/
+{
+    return{
+        menuTitle:state
+    }
+};
+export default connect(mapSateToProps)(Header)

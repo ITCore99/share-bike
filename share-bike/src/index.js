@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Router from "./router/index"
+import store from "./redux/store/index"
+import {Provider} from "react-redux" //注入
 ReactDOM.render(
-    <App>
+    <Provider store={store}>
+        <App>
         <Router></Router>
-    </App>
+        </App>
+    </Provider>
     , document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
